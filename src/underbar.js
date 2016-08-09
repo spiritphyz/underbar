@@ -84,6 +84,28 @@
     // TIP: Here's an example of a function that needs to iterate, which we've
     // implemented for you. Instead of using a standard `for` loop, though,
     // it uses the iteration helper `each`, which you will need to write.
+    var result = -1;
+    var wasFound = false;
+    _.each(array, function(item, index) {
+      if (item === target && !wasFound) {
+        result = index;
+        wasFound = true;
+      }
+    });
+    return result;
+  };
+
+  /** es6 style */
+  _.indexOf = (array, target) => {
+    let result = -1;
+    let wasFound = false;
+    _.each(array, function(item, index) {
+      if (item === target && !wasFound) {
+        result = index;
+        wasFound = true;
+      }
+    });
+    return result;
   };
 
   // Return all elements of an array that pass a truth test.
