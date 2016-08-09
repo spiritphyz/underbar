@@ -52,6 +52,30 @@
   // Note: _.each does not have a return value, but rather simply runs the
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
+    var i, key;
+    if (Array.isArray(collection)) {
+      for (i = 0; i < collection.length; i += 1) {
+        iterator(collection[i], i, collection);
+      }
+    } else {
+      for (key in collection) {
+        iterator(collection[key], key, collection);
+      }
+    }
+  };
+
+  /** es6 style */
+  _.each = (collection, iterator) => {
+    let i, key;
+    if (Array.isArray(collection)) {
+      for (i = 0; i < collection.length; i += 1) {
+        iterator(collection[i], i, collection);
+      }
+    } else {
+      for (key in collection) {
+        iterator(collection[key], key, collection);
+      }
+    }
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
@@ -60,15 +84,6 @@
     // TIP: Here's an example of a function that needs to iterate, which we've
     // implemented for you. Instead of using a standard `for` loop, though,
     // it uses the iteration helper `each`, which you will need to write.
-    var result = -1;
-
-    _.each(array, function(item, index) {
-      if (item === target && result === -1) {
-        result = index;
-      }
-    });
-
-    return result;
   };
 
   // Return all elements of an array that pass a truth test.
