@@ -295,11 +295,9 @@
   };
 
   /** es6 style */
-  _.every = (collection, iterator) => {
-    iterator = iterator || _.identity;
-    return _.reduce(collection, (memo, item) => memo && 
-      Boolean(iterator(item)), true);
-  };
+  _.every = (collection, iterator = _.identity) => 
+    _.reduce(collection, (memo, item) =>
+      memo && Boolean(iterator(item)), true);
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
@@ -315,11 +313,9 @@
    * ES6 style that implements every().
    * Either all are false or some must be true.
    */
-  _.some = (collection, iterator) => {
-    iterator = iterator || _.identity;
+  _.some = (collection, iterator = _.identity) => {
     let allFalse = _.every(collection, item => 
-      Boolean(iterator(item)) === false
-    );
+      Boolean(iterator(item)) === false);
     return allFalse === true ? false : true;
   };
 
@@ -417,6 +413,18 @@
       return result;
     };
   };
+
+  // _.once = func => {
+  //   let alreadyCalled = false;
+  //   let result;
+  //   return () => {
+  //     if (!alreadyCalled) {
+  //       result = func(...arguments);
+  //       alreadyCalled = true;
+  //     }
+  //     return result;
+  //   };
+  // };
 
   // Memorize an expensive function's results by storing them. You may assume
   // that the function only takes primitives as arguments.
