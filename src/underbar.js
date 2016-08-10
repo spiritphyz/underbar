@@ -110,6 +110,22 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
+    return _.reduce(collection, function(memo, item) {
+      if (test(item)) {
+        memo.push(item);
+      }
+      return memo;
+    }, []);
+  };
+
+  /** es6 style */
+  _.filter = (collection, test) => {
+    return _.reduce(collection, (memo, item) => {
+      if (test(item)) {
+        memo.push(item);
+      }
+      return memo;
+    }, []);
   };
 
   // Return all elements of an array that don't pass a truth test.
