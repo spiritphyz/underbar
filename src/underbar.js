@@ -434,6 +434,26 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var map = {};
+    return function() {
+      var argList = [].slice.call(arguments).join('');
+      if (!map.hasOwnProperty(argList)) {
+        map[argList] = func.apply(null, arguments);
+      }
+      return map[argList];
+    };
+  };
+
+  /** es6 style */
+  _.memoize = func => {
+    var map = {};
+    return function() {
+      var argList = [].slice.call(arguments).join('');
+      if (!map.hasOwnProperty(argList)) {
+        map[argList] = func(...arguments);
+      }
+      return map[argList];
+    };
   };
 
   // Delays a function for the given number of milliseconds, and then calls
