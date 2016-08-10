@@ -446,9 +446,9 @@
 
   /** es6 style */
   _.memoize = func => {
-    var map = {};
+    let map = {};
     return function() {
-      var argList = [].slice.call(arguments).join('');
+      let argList = [].slice.call(arguments).join('');
       if (!map.hasOwnProperty(argList)) {
         map[argList] = func(...arguments);
       }
@@ -463,8 +463,15 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    var args = [].slice.call(arguments, 2);
+    setTimeout(function() {
+      func.apply(null, args);
+    }, wait);
   };
 
+  /** es6 style */
+  _.delay = (func, wait, ...args) => 
+    setTimeout(() => func(...args), wait);
 
   /**
    * ADVANCED COLLECTION OPERATIONS
