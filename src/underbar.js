@@ -332,6 +332,21 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
+    var objList = [].slice.call(arguments, 1);
+    return _.reduce(objList, function(memo, nextObj) {
+      _.each(nextObj, function(val, key) {
+        memo[key] = val;
+      });
+      return memo;
+    }, obj);
+  };
+
+  /** es6 style */
+  _.extend = (obj, ...objList) => {
+    return _.reduce(objList, (memo, nextObj) => {
+      _.each(nextObj, (val, key) => memo[key] = val);
+      return memo;
+    }, obj);
   };
 
   // Like extend, but doesn't ever overwrite a key that already
