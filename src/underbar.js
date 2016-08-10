@@ -99,7 +99,7 @@
   _.indexOf = (array, target) => {
     let result = -1;
     let wasFound = false;
-    _.each(array, function(item, index) {
+    _.each(array, (item, index) => {
       if (item === target && !wasFound) {
         result = index;
         wasFound = true;
@@ -168,7 +168,45 @@
   //     return total + number * number;
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
-  _.reduce = function(collection, iterator, accumulator) {
+  _.reduce = function(collection, iterator, accum) {
+    var skipOneRun;
+    if (accum === undefined) {
+      if (Array.isArray(collection)) {
+        accum = collection[0];
+      } else {
+        accum = collection[ Object.keys(collection)[0] ];
+      }
+      skipOneRun = true;
+    }
+    _.each(collection, function(item) {
+      if (skipOneRun) {
+        skipOneRun = false;
+      } else {
+        accum = iterator(accum, item);
+      }
+    });
+    return accum;
+  };
+
+  /** es6 style */
+  _.reduce = (collection, iterator, accum) => {
+    var skipOneRun;
+    if (accum === undefined) {
+      if (Array.isArray(collection)) {
+        accum = collection[0];
+      } else {
+        accum = collection[ Object.keys(collection)[0] ];
+      }
+      skipOneRun = true;
+    }
+    _.each(collection, item => {
+      if (skipOneRun) {
+        skipOneRun = false;
+      } else {
+        accum = iterator(accum, item);
+      }
+    });
+    return accum;
   };
 
   // Determine if the array or object contains a given value (using `===`).
