@@ -241,7 +241,7 @@
 
   /** es6 style */
   _.reduce = (collection, iterator, accum) => {
-    var skipOneRun;
+    let skipOneRun;
     if (accum === undefined) {
       if (Array.isArray(collection)) {
         accum = collection[0];
@@ -294,7 +294,23 @@
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
     iterator = iterator || _.identity;
+    return _.reduce(collection, function(memo, item) {
+      return memo || Boolean(iterator(item));
+    }, false);
   };
+
+  /**
+   * ES6 style that implements every().
+   * Either all are false or some must be true.
+   */
+  _.some = (collection, iterator) => {
+    iterator = iterator || _.identity;
+    let allFalse = _.every(collection, item => 
+      Boolean(iterator(item)) === false
+    );
+    return allFalse === true ? false : true;
+  };
+
 
 
   /**
