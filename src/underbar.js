@@ -319,8 +319,6 @@
     return allFalse === true ? false : true;
   };
 
-
-
   /**
    * OBJECTS
    * =======
@@ -414,17 +412,18 @@
     };
   };
 
-  // _.once = func => {
-  //   let alreadyCalled = false;
-  //   let result;
-  //   return () => {
-  //     if (!alreadyCalled) {
-  //       result = func(...arguments);
-  //       alreadyCalled = true;
-  //     }
-  //     return result;
-  //   };
-  // };
+  /** es6 style */
+  _.once = func => {
+    let alreadyCalled = false;
+    let result;
+    return function() {
+      if (!alreadyCalled) {
+        result = func(...arguments);
+        alreadyCalled = true;
+      }
+      return result;
+    };
+  };
 
   // Memorize an expensive function's results by storing them. You may assume
   // that the function only takes primitives as arguments.
