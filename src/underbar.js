@@ -364,8 +364,28 @@
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    var objList = [].slice.call(arguments, 1);
+    return _.reduce(objList, function(memo, nextObj) {
+      _.each(nextObj, function(val, key) {
+        if (!memo.hasOwnProperty(key)) {
+          memo[key] = val;
+        }
+      });
+      return memo;
+    }, obj);
   };
 
+  /** es6 style */
+  _.defaults = (obj, ...objList) => {
+    return _.reduce(objList, (memo, nextObj) => {
+      _.each(nextObj, (val, key) => {
+        if (!memo.hasOwnProperty(key)) {
+          memo[key] = val;
+        }
+      });
+      return memo;
+    }, obj); 
+  };
 
   /**
    * FUNCTIONS
