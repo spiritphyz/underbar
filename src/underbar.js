@@ -35,6 +35,10 @@
     return n === undefined ? array[0] : array.slice(0, n);
   };
 
+  /** es6 style */
+  _.first = (array, n) => n === undefined ?
+    array[0] : array.slice(0, n);
+
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
@@ -44,6 +48,14 @@
     return _.first(array.reverse(), n).reverse();
     // orig order:    [a,b,c,d,e] -> first 3 -> a,b,c
     // reverse order: [e,d,c,b,a] -> first 3 -> e,d,c -> reverse -> c,d,e
+  };
+
+  /** es6 style */
+  _.last = (array, n) => {
+    if (n === undefined) {
+      return array[array.length - 1];
+    }
+    return _.first(array.reverse(), n).reverse();
   };
 
   // Call iterator(value, key, collection) for each element of collection.
