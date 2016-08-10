@@ -264,14 +264,14 @@
   _.contains = function(collection, target) {
     // TIP: Many iteration problems can be most easily expressed in
     // terms of reduce(). Here's a freebie to demonstrate!
-    return _.reduce(collection, function(wasFound, item) {
-      if (wasFound) {
-        return true;
-      }
-      return item === target;
+    return _.reduce(collection, function(memo, item) {
+      return memo || item === target;
     }, false);
   };
 
+  /** es6 style */
+  _.contains = (collection, target) => 
+    _.reduce(collection, (memo, item) => memo || target === item, false); 
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
