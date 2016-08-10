@@ -143,8 +143,22 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    return _.reduce(array, function(memo, item) {
+      if (_.indexOf(memo, item) < 0) {
+        memo.push(item);
+      }
+      return memo;
+    }, []);
   };
 
+  /** es6 style */
+  _.uniq = array => 
+    _.reduce(array, (memo, item) => {
+      if (_.indexOf(memo, item) < 0) {
+        memo.push(item);
+      }
+      return memo;
+    }, []);
 
   // Return the results of applying an iterator to each element.
   _.map = function(collection, iterator) {
