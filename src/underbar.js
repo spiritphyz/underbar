@@ -497,6 +497,18 @@
     return result;
   };
 
+  /** es6 style */
+  _.shuffle = arr => {
+    let result = [...arr];
+    do {
+      result.sort(() => Math.floor(Math.random() * 3 - 1));
+    } while (
+      JSON.stringify(arr) ===
+      JSON.stringify(result)
+    );
+    return result;
+  };
+
 
   /**
    * ADVANCED
