@@ -484,6 +484,17 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    var result = array.slice();
+    var compareFunc = function() {
+      return Math.floor(Math.random() * 3 - 1);
+    };
+    do {
+      result.sort(compareFunc);
+    } while (
+      JSON.stringify(array) ===
+      JSON.stringify(result)
+    );
+    return result;
   };
 
 
