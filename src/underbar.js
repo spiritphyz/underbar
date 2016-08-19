@@ -37,7 +37,7 @@
 
   /** es6 style */
   _.first = (array, n) => n === undefined ?
-    array[0] : array.slice(0, n);
+  array[0] : array.slice(0, n);
 
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
@@ -151,7 +151,7 @@
 
   /** es6 style */
   _.reject = (collection, test) => 
-    _.filter(collection, item => !test(item));
+  _.filter(collection, item => !test(item));
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
@@ -165,12 +165,12 @@
 
   /** es6 style */
   _.uniq = array => 
-    _.reduce(array, (memo, item) => {
-      if (_.indexOf(memo, item) < 0) {
-        memo.push(item);
-      }
-      return memo;
-    }, []);
+  _.reduce(array, (memo, item) => {
+    if (_.indexOf(memo, item) < 0) {
+      memo.push(item);
+    }
+    return memo;
+  }, []);
 
   // Return the results of applying an iterator to each element.
   _.map = function(collection, iterator) {
@@ -185,10 +185,10 @@
 
   /** es6 style */
   _.map = (collection, iterator) =>
-    _.reduce(collection, (memo, item) => {
-      memo.push(iterator(item));
-      return memo;
-    }, []);
+  _.reduce(collection, (memo, item) => {
+    memo.push(iterator(item));
+    return memo;
+  }, []);
 
   /*
    * TIP: map is really handy when you want to transform an array of
@@ -283,7 +283,7 @@
 
   /** es6 style */
   _.contains = (collection, target) => 
-    _.reduce(collection, (memo, item) => memo || target === item, false); 
+  _.reduce(collection, (memo, item) => memo || target === item, false); 
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
@@ -296,8 +296,8 @@
 
   /** es6 style */
   _.every = (collection, iterator = _.identity) => 
-    _.reduce(collection, (memo, item) =>
-      memo && Boolean(iterator(item)), true);
+  _.reduce(collection, (memo, item) =>
+    memo && Boolean(iterator(item)), true);
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
@@ -412,7 +412,7 @@
     };
   };
 
-  /** es6 style */
+    /** es6 style */
   _.once = func => {
     let alreadyCalled = false;
     let result;
@@ -448,7 +448,7 @@
   _.memoize = func => {
     let map = {};
     return function() {
-      let argList = [].slice.call(arguments).join('');
+      let argList = [...arguments].join('');
       if (!map.hasOwnProperty(argList)) {
         map[argList] = func(...arguments);
       }
@@ -471,7 +471,7 @@
 
   /** es6 style */
   _.delay = (func, wait, ...args) => 
-    setTimeout(() => func(...args), wait);
+  setTimeout(() => func(...args), wait);
 
   /**
    * ADVANCED COLLECTION OPERATIONS
@@ -493,7 +493,7 @@
     } while (
       JSON.stringify(array) ===
       JSON.stringify(result)
-    );
+      );
     return result;
   };
 
@@ -505,7 +505,7 @@
     } while (
       JSON.stringify(arr) ===
       JSON.stringify(result)
-    );
+      );
     return result;
   };
 
