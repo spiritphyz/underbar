@@ -534,6 +534,25 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+    // input:  an array of objects,
+    //         then a function (iterator) or a string
+    // output: a sorted array of objects
+    // constraints:  should handle undefined values,
+    //               native length lookup,
+    //               change the order of the resulting array as little as possible
+    // step by step plan:
+    // if iterator is a string, call list's sort func using object-property notation as values
+    // otherwise, call list's sort function using return value of iterator as sort value
+    var isString = typeof iterator === 'string';
+    if (isString) {
+      return collection.sort(function(a, b) {
+        return a[iterator] - b[iterator];
+      });
+    } else {
+      return collection.sort(function(a, b) {
+        return iterator(a) - iterator(b);
+      });
+    }
   };
 
   // Zip together two or more arrays with elements of the same index
