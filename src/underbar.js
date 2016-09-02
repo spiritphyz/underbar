@@ -587,6 +587,15 @@
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+    var list = [].slice.call(arguments);
+    var firstArr = list.slice(0, 1)[0];
+    var isShared;
+    return _.reduce(firstArr, function(memo, item) { // 1st array must have all shared items
+      isShared = _.every(list, function(arr) {
+        return _.contains(arr, item);
+      });
+      return isShared ? (memo.push(item), memo) : memo;
+    }, []);
   };
 
   // Take the difference between one array and a number of other arrays.
