@@ -588,7 +588,7 @@
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
     var list = [].slice.call(arguments);
-    var firstArr = list.slice(0, 1)[0];
+    var firstArr = list.splice(0, 1)[0];
     var isShared;
     return _.reduce(firstArr, function(memo, item) { // 1st array must have all shared items
       isShared = _.every(list, function(arr) {
