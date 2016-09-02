@@ -577,6 +577,11 @@
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+    return _.reduce(nestedArray, function(memo, next) {
+      return memo.concat(
+        Array.isArray(next) ? _.flatten(next) : next
+      );
+    }, []);
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
