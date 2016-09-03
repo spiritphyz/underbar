@@ -597,6 +597,7 @@
     return result;
   };
 
+  /** es6 style */
   _.zip = (...arrays) => {
     const result = [];
     const maxLength = _.reduce(arrays, (memo, arr) => Math.max(memo, arr.length), 0);
@@ -617,6 +618,11 @@
       );
     }, []);
   };
+
+  /** es6 style */
+  _.flatten = (nestedArray, result) => 
+    _.reduce(nestedArray, (memo, next) => 
+      memo.concat(Array.isArray(next) ? _.flatten(next) : next), []);
 
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
