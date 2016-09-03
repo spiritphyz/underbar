@@ -404,6 +404,7 @@
     var alreadyCalled = false;
     var result;
     return function() {
+      console.log('arguments:', arguments);
       if (!alreadyCalled) {
         result = func.apply(this, arguments);
         alreadyCalled = true;
@@ -465,11 +466,11 @@
   _.delay = function(func, wait) {
     var args = [].slice.call(arguments, 2);
     setTimeout(function() {
-      func.apply(null, args);
+      func.apply(this, args);
     }, wait);
   };
 
-  /** es6 style */
+  // /** es6 style */
   _.delay = (func, wait, ...args) => 
     setTimeout(() => func(...args), wait);
 
@@ -601,6 +602,10 @@
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+    var list = _.flatten([].slice.call(arguments, 1));
+    return _.reduce(array, function(memo, item) {
+      return !_.contains(list, item) ? (memo.push(item), memo) : memo;
+    }, []);
   };
 
   // Returns a function, that, when invoked, will only be triggered at most once
@@ -609,5 +614,15 @@
   //
   // Note: This is difficult! It may take a while to implement.
   _.throttle = function(func, wait) {
+    var lock = false;
+    return function () {
+      if (!lock) {
+        _.delay(function() {
+          func();
+          lock = false;
+        }, wait);
+        lock = true;
+      }
+    };
   };
 }());
