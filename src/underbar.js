@@ -668,12 +668,28 @@
   // Note: This is difficult! It may take a while to implement.
   _.throttle = function(func, wait) {
     var lock = false;
+    var delayedFunc = function() {
+      func();
+      lock = false;
+    };
     return function () {
       if (!lock) {
-        _.delay(function() {
-          func();
-          lock = false;
-        }, wait);
+        _.delay(delayedFunc, wait);
+        lock = true;
+      }
+    };
+  };
+
+  /** es6 style */
+  _.throttle = (func, wait) => {
+    let lock = false;
+    const delayedFunc = () => {
+      func();
+      lock = false;
+    };
+    return () => {
+      if (!lock) {
+        _.delay(delayedFunc, wait);
         lock = true;
       }
     };
