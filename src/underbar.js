@@ -530,6 +530,18 @@
     });
   };
 
+  /** es6 style */
+  _.invoke = (collection, functionOrKey, ...args) => {
+    const isFunc = typeof functionOrKey === 'function';
+    return _.map(collection, item => {
+      return isFunc ?
+        // es6 spread operator won't handle explicitly setting 'this', must use apply() 
+        // https://derickbailey.com/2015/11/16/kill-apply-with-the-spread-operator/
+        functionOrKey.apply(item, args) : 
+        item[functionOrKey](item, ...args);
+    });
+  };
+
   // Sort the object's values by a criterion produced by an iterator.
   // If iterator is a string, sort objects by that property with the name
   // of that string. For example, _.sortBy(people, 'name') should sort
