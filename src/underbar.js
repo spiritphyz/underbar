@@ -568,19 +568,40 @@
     }
   };
 
+/** es6 style */
+  _.sortBy = (collection, iterator) => {
+    const isString = typeof iterator === 'string';
+    if (isString) {
+      return collection.sort((a, b) => 
+        a[iterator] - b[iterator]);
+    } else {
+      return collection.sort((a, b) => 
+        iterator(a) - iterator(b));
+    }
+  };
+
   // Zip together two or more arrays with elements of the same index
   // going together.
   //
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
-    var arrList = [].slice.call(arguments);
+    var list = [].slice.call(arguments);
     var result = [];
-    var maxLength = _.reduce(arrList, function(memo, arr) {
+    var maxLength = _.reduce(list, function(memo, arr) {
       return Math.max(memo, arr.length);
     }, 0);
     for (var i = 0; i < maxLength; i += 1) {
-      result.push(_.pluck(arrList, i));
+      result.push(_.pluck(list, i));
+    }
+    return result;
+  };
+
+  _.zip = (...arrays) => {
+    const result = [];
+    const maxLength = _.reduce(arrays, (memo, arr) => Math.max(memo, arr.length), 0);
+    for (let i = 0; i < maxLength; i += 1) {
+      result.push(_.pluck(arrays, i));
     }
     return result;
   };
