@@ -638,6 +638,13 @@
     }, []);
   };
 
+  /** es6 style */
+  _.intersection = (firstArr, ...arrList) => 
+    _.reduce(firstArr, (memo, item) => { 
+      const isShared = _.every(arrList, arr => _.contains(arr, item));
+      return isShared ? (memo.push(item), memo) : memo;
+    }, []);
+
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
