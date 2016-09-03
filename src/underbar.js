@@ -654,6 +654,13 @@
     }, []);
   };
 
+  /** es6 style */
+  _.difference = (array, ...arrays) => {
+    const list = _.flatten(arrays);
+    return _.reduce(array, (memo, item) => 
+      !_.contains(list, item) ? (memo.push(item), memo) : memo, []);
+  };
+
   // Returns a function, that, when invoked, will only be triggered at most once
   // during a given window of time.  See the Underbar readme for extra details
   // on this function.
