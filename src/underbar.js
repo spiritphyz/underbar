@@ -470,7 +470,7 @@
     }, wait);
   };
 
-  // /** es6 style */
+  /** es6 style */
   _.delay = (func, wait, ...args) => 
     setTimeout(() => func(...args), wait);
 
@@ -492,21 +492,19 @@
     do {
       result.sort(compareFunc);
     } while (
-      JSON.stringify(array) ===
-      JSON.stringify(result)
-      );
+      JSON.stringify(array) === JSON.stringify(result)
+    );
     return result;
   };
 
   /** es6 style */
   _.shuffle = arr => {
-    let result = [...arr];
+    const result = Array.from(arr);
     do {
       result.sort(() => Math.floor(Math.random() * 3 - 1));
     } while (
-      JSON.stringify(arr) ===
-      JSON.stringify(result)
-      );
+      JSON.stringify(arr) === JSON.stringify(result)
+    );
     return result;
   };
 
