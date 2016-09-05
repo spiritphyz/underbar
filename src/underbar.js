@@ -446,16 +446,16 @@
   };
 
   /** es6 style */
-  // _.memoize = func => {
-  //   let map = {};
-  //   return function() {
-  //     let argList = [...arguments].join('');
-  //     if (!map.hasOwnProperty(argList)) {
-  //       map[argList] = func(...arguments);
-  //     }
-  //     return map[argList];
-  //   };
-  // };
+  _.memoize = func => {
+    const table = {};
+    return function() {
+      const args = JSON.stringify(arguments);
+      if (!table.hasOwnProperty(args)) {
+        table[args] = func(...arguments);
+      }
+      return table[args];
+    };
+  };
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.
