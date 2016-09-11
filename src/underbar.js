@@ -81,13 +81,12 @@
 
   /** es6 style */
   _.each = (collection, iterator) => {
-    let i, key;
     if (Array.isArray(collection)) {
       for (let [i, val] of collection.entries()) {
         iterator(val, i, collection);
       }
     } else {
-      for (key in collection) {
+      for (let key of Object.keys(collection)) {
         iterator(collection[key], key, collection);
       }
     }
