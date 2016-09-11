@@ -10,6 +10,9 @@
     return val;
   };
 
+  /** es6 style */
+  _.identity = val => val;
+
   /**
    * COLLECTIONS
    * ===========
