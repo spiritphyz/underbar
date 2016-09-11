@@ -83,8 +83,8 @@
   _.each = (collection, iterator) => {
     let i, key;
     if (Array.isArray(collection)) {
-      for (i = 0; i < collection.length; i += 1) {
-        iterator(collection[i], i, collection);
+      for (let [i, val] of collection.entries()) {
+        iterator(val, i, collection);
       }
     } else {
       for (key in collection) {
